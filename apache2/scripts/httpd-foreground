@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ ! -f /etc/pki/tls/certs/localhost.crt ];
+then 
+  echo "=====ERROR===="
+  echo "In order to properly use this container you use supply your own SSL certificate";
+  echo "This container is expecting to find the certificate and key here:";
+  echo "/etc/pki/tls/certs/localhost.crt";
+  echo "/etc/pki/tls/private/localhost.key";
+  exit 1;
+fi;
+
+exec httpd -DFOREGROUND
