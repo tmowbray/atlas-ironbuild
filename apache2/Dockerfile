@@ -1,13 +1,13 @@
 ARG BASE_REGISTRY=registry1.dso.mil
-ARG BASE_IMAGE=ironbank/redhat/ubi/ubi8-minimal
+ARG BASE_IMAGE=ironbank/redhat/ubi/ubi8
 ARG BASE_TAG=8.6
 
 FROM ${BASE_REGISTRY}/${BASE_IMAGE}:${BASE_TAG}
 
-RUN microdnf -y upgrade && \
-    microdnf -y install httpd-2.4.37 && \
-    microdnf -y install mod_ssl && \
-    microdnf -y clean all
+RUN dnf -y upgrade && \
+    dnf -y install httpd-2.4.37 && \
+    dnf -y install mod_ssl && \
+    dnf -y clean all
 
 COPY --chown=apache:apache scripts/httpd-foreground /etc/httpd/httpd-foreground
 
